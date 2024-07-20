@@ -1,0 +1,52 @@
+<script type="text/javascript">
+  RED.nodes.registerType('linksys-device', {
+    category: 'config',
+    defaults: {
+      networkAddress: {
+        type: 'text',
+        required: true,
+        value: '',
+      },
+      password: {
+        type: 'password',
+        value: '',
+      },
+    },
+    label: function () {
+      return this.networkAddress || '';
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="linksys-device"
+>
+  <div class="form-row">
+    <label for="node-config-input-networkAddress"><i class="fa fa-wifi"></i> Network Address</label>
+    <input
+      type="text"
+      id="node-config-input-networkAddress"
+      placeholder="x.x.x.x"
+    >
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-password"><i class="fa fa-lock"></i> Password</label>
+    <input
+      type="password"
+      id="node-config-input-password"
+    >
+  </div>
+</script>
+
+<script
+  type="text/x-red"
+  data-help-name="linksys-device"
+>
+  <p>Device configuration node that holds network parameters.</p>
+  <h4>Configuration</h4>
+  <ul>
+    <li><b>Network Address</b> - IP address or hostname, optionally with port.</li>
+    <li><b>Password</b> - Admin password.</li>
+  </ul>
+</script>

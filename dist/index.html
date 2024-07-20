@@ -1,0 +1,129 @@
+<script type="text/javascript">
+  RED.nodes.registerType('linksys-action', {
+    category: 'linksys',
+    color: '#0098ed',
+    defaults: {
+      device: {
+        type: 'linksys-device',
+        required: true,
+        value: '',
+      },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'font-awesome/wifi',
+    label: function () {
+      return this.name || 'Linksys Action';
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="linksys-action"
+>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input
+      type="text"
+      id="node-input-name"
+      placeholder="Name"
+    >
+  </div>
+  <div class="form-row">
+    <label for="node-input-device"><i class="fa fa-server"></i> Device</label>
+    <input
+      type="text"
+      id="node-input-device"
+      placeholder="Device"
+    >
+  </div>
+</script>
+
+<script
+  type="text/x-red"
+  data-help-name="linksys-action"
+>
+  <p>Execute Linksys device action.</p>
+  <h4>Configuration</h4>
+  <ul>
+    <li>(optional) <b>Name</b> - Name of the node.</li>
+    <li><b>Device</b> - Device configuration node reference.</li>
+  </ul>
+  <h4>Input Message</h4>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">object</span></dt>
+    <dd>
+      Contains action info.
+      <dl class="message-properties">
+        <dt>data <span class="property-type">object</span></dt>
+        <dd>Action payload.</dd>
+      </dl>
+    </dd>
+  </dl>
+  <h4>Output Message</h4>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">object</span></dt>
+    <dd>
+      Contains device info.
+      <dl class="message-properties">
+        <dt>state <span class="property-type">object</span></dt>
+        <dd>Partial Device State object with updated values. If everything is ok, it should basically contain <code>data</code> from incoming message.</dd>
+      </dl>
+    </dd>
+  </dl>
+  <p>Extra <code>msg</code> parameters such as <code>msg.topic</code> and the rest of <code>msg.payload</code>
+  from the input message are merged and passed through to the output message.</p>
+</script>
+<script type="text/javascript">
+  RED.nodes.registerType('linksys-device', {
+    category: 'config',
+    defaults: {
+      networkAddress: {
+        type: 'text',
+        required: true,
+        value: '',
+      },
+      password: {
+        type: 'password',
+        value: '',
+      },
+    },
+    label: function () {
+      return this.networkAddress || '';
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="linksys-device"
+>
+  <div class="form-row">
+    <label for="node-config-input-networkAddress"><i class="fa fa-wifi"></i> Network Address</label>
+    <input
+      type="text"
+      id="node-config-input-networkAddress"
+      placeholder="x.x.x.x"
+    >
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-password"><i class="fa fa-lock"></i> Password</label>
+    <input
+      type="password"
+      id="node-config-input-password"
+    >
+  </div>
+</script>
+
+<script
+  type="text/x-red"
+  data-help-name="linksys-device"
+>
+  <p>Device configuration node that holds network parameters.</p>
+  <h4>Configuration</h4>
+  <ul>
+    <li><b>Network Address</b> - IP address or hostname, optionally with port.</li>
+    <li><b>Password</b> - Admin password.</li>
+  </ul>
+</script>
