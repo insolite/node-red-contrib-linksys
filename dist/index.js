@@ -46,7 +46,8 @@ const nodeInit = (RED) => {
       const availableActions = [
         "getInfo",
         "getDevices",
-        "getNetworkConnections"
+        "getNetworkConnections",
+        "getBackhaulInfo"
       ];
       if (!availableActions.includes(action)) {
         node.error("Action is not specified", msg);

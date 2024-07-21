@@ -28,6 +28,7 @@ const nodeInit: NodeInitializer = (RED) => {
         'getInfo',
         'getDevices',
         'getNetworkConnections',
+        'getBackhaulInfo',
       ];
       if (!availableActions.includes(action)) {
         node.error('Action is not specified', msg);
